@@ -1,0 +1,99 @@
+{
+ "properties": {
+  "displayName": "AuditEncryption",
+  "policyType": "Custom",
+  "metadata": {
+   "category": "Encryption",
+   "version": "1.0",
+   "createdBy": "ad2b651a-f20e-4fab-932e-ac1f798a50e2",
+   "createdOn": "2022-12-13T09:11:09.4822082Z",
+   "updatedBy": null,
+   "updatedOn": null
+  },
+  "parameters": {},
+  "policyDefinitions": [
+   {
+    "policyDefinitionReferenceId": "Protect data in transit using encryption_1",
+    "policyDefinitionId": "/providers/Microsoft.Authorization/policyDefinitions/b11697e8-9515-16f1-7a35-477d5c8a1344",
+    "parameters": {},
+    "groupNames": []
+   },
+   {
+    "policyDefinitionReferenceId": "Transparent Data Encryption on SQL databases should be enabled_1",
+    "policyDefinitionId": "/providers/Microsoft.Authorization/policyDefinitions/17k78e20-9358-41c9-923c-fb736d382a12",
+    "parameters": {},
+    "groupNames": []
+   },
+   {
+    "policyDefinitionReferenceId": "Storage accounts should have infrastructure encryption_1",
+    "policyDefinitionId": "/providers/Microsoft.Authorization/policyDefinitions/4733ea7b-a883-42fe-8cac-97454c2a9e4a",
+    "parameters": {},
+    "groupNames": []
+   },
+   {
+    "policyDefinitionReferenceId": "Deploy SQL DB transparent data encryption_1",
+    "policyDefinitionId": "/providers/Microsoft.Authorization/policyDefinitions/86a912f6-9a06-4e26-b447-11b16ba8659f",
+    "parameters": {},
+    "groupNames": []
+   },
+   {
+    "policyDefinitionReferenceId": "Disk encryption should be enabled on Azure Data Explorer_1",
+    "policyDefinitionId": "/providers/Microsoft.Authorization/policyDefinitions/f4b53539-8df9-40e4-86c6-6b607703bd4e",
+    "parameters": {},
+    "groupNames": []
+   },
+   {
+    "policyDefinitionReferenceId": "Virtual machines and virtual machine scale sets should have encryption at host enabled_1",
+    "policyDefinitionId": "/providers/Microsoft.Authorization/policyDefinitions/fc4d8e41-e223-45ea-9bf5-eada37891d87",
+    "parameters": {},
+    "groupNames": []
+   },
+   {
+    "policyDefinitionReferenceId": "Deploy SQL Database Transparent Data Encryption _1",
+    "policyDefinitionId": "/providers/Microsoft.Management/managementGroups/galz/providers/Microsoft.Authorization/policyDefinitions/Deploy-Sql-Tde",
+    "parameters": {},
+    "groupNames": []
+   },
+   {
+    "policyDefinitionReferenceId": "App Service Environment should have internal encryption enabled_1",
+    "policyDefinitionId": "/providers/Microsoft.Authorization/policyDefinitions/fb74e86f-d351-4b8d-b034-93da7391c01f",
+    "parameters": {},
+    "groupNames": []
+   },
+   {
+    "policyDefinitionReferenceId": "Require encryption on Data Lake Store accounts_1",
+    "policyDefinitionId": "/providers/Microsoft.Authorization/policyDefinitions/a7ff3161-0087-490a-9ad9-ad6217f4f43a",
+    "parameters": {},
+    "groupNames": []
+   },
+   {
+    "policyDefinitionReferenceId": "Infrastructure encryption should be enabled for Azure Database for MySQL servers_1",
+    "policyDefinitionId": "/providers/Microsoft.Authorization/policyDefinitions/3a58212a-c829-4f13-9872-6371df2fd0b4",
+    "parameters": {},
+    "groupNames": []
+   },
+   {
+    "policyDefinitionReferenceId": "Infrastructure encryption should be enabled for Azure Database for PostgreSQL servers_1",
+    "policyDefinitionId": "/providers/Microsoft.Authorization/policyDefinitions/24fba194-95d6-48c0-aea7-f65bf859c598",
+    "parameters": {},
+    "groupNames": []
+   },
+   {
+    "policyDefinitionReferenceId": "Microsoft Managed Control 1062 - Remote Access | Protection Of Confidentiality / Integrity Using Enc_1",
+    "policyDefinitionId": "/providers/Microsoft.Authorization/policyDefinitions/4708723f-e099-4af1-bbf9-b6df7642e444",
+    "parameters": {},
+    "groupNames": []
+   }
+  ],
+  "policyDefinitionGroups": [
+   {
+    "name": "AuditEncryptionRequirements",
+    "category": "Encryption",
+    "displayName": "Audit Encryption"
+   }
+  ]
+ },
+ "id": "/subscriptions/00d9879b-7003-4d32-978f-8fd52cab1d29/providers/Microsoft.Authorization/policySetDefinitions/097bb2ba7bb54231a022f2b8",
+ "type": "Microsoft.Authorization/policySetDefinitions",
+ "name": "097bb2ba7bb54231a022f2b8"
+}
