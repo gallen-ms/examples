@@ -1,12 +1,10 @@
 #An adaption of an existing script with some additional error handling and the creation of a single CSV file. Parameterized. 
-# The script is intended to use Azure Powershell  to connect to your Sentinel instances workspace and collect all the analytic rules and then parse them to extract the table
-
 
 [CmdletBinding()]
 param (
     [Parameter()]
     [string]
-    $tenantId,
+    $tenantId="",
     [Parameter()]
     [string]
     $subscriptionId,
@@ -17,8 +15,8 @@ param (
     [string]
     $workspaceName,
     [Parameter()]
-    [string]
-    $CSVExportPath = "$($env:TEMP)"
+    [string] #include the trailing slash, this should work in Azure CLI as /home/username/
+    $CSVExportPath = "$($env:HOME)\"
 
 )
 
@@ -36,14 +34,15 @@ if(!(Get-Module -Name Az.SecurityInsights)){
 }
 
 #Authenticate to Azure
-Connect-AzAccount 
+if(!Get-AzContext){
+    Write-Host "No Azure context found. Please authenticate."
+    Connect-AzAccount -ErrorAction Stop
+}
 
 #Set your context
-if($tenantId){
     Set-AzContext -TenantId $tenantId
-}else{
     Set-AzContext -SubscriptionId $subscriptionId
-}
+
 
 if(!(Get-AzContext)){
     Write-Host "No Azure context found. Please authenticate and set the context."
@@ -63,11 +62,11 @@ $export = $scheduledRules | Select-Object `
     @{Name="Severity"; Expression={$_.Severity}}, `
     @{Name="Query"; Expression={$_.Query}}, `
     @{Name="Tactics"; Expression={($_.Tactics -join ", ")}}
-$export | Export-Csv -Path "$($CSVExportPath)\SentinelAnalyticsRules.csv" -NoTypeInformation
+$export | Export-Csv -Path "$($CSVExportPath)SentinelAnalyticsRules.csv" -NoTypeInformation
 
 
 # Load the exported CSV
-$importedrules = Import-Csv -Path "$($CSVExportPath)\SentinelAnalyticsRules.csv"
+$importedrules = Import-Csv -Path "$($CSVExportPath)SentinelAnalyticsRules.csv"
 # Function to extract table names from KQL query
 function Get-TableNamesFromKQL {
     param (
@@ -88,8 +87,8 @@ function Get-TableNamesFromKQL {
 $results = foreach ($rule in $importedrules) {
     $tables = Get-TableNamesFromKQL -query $rule.Query
     [PSCustomObject]@{
-        RuleName = $rule.DisplayName
-        RuleId   = $rule.Name
+        RuleName = $rule.RuleName
+        RuleId   = $rule.RuleId
         Severity = $rule.Severity
         Enabled  = $rule.Enabled
         Tactics  = $rule.Tactics
@@ -98,8 +97,8 @@ $results = foreach ($rule in $importedrules) {
     }
 }
 # Export the results
-$results | Export-Csv -Path "$($CSVExportPath)\SentinelAnalyticsRules.csv" -NoTypeInformation
-Write-Host "✅ Table extraction complete. Output saved to $($CSVExportPath)\SentinelAnalyticsRules.csv"
+$results  | Export-Csv -Path "$($CSVExportPath)SentinelAnalyticsRules.csv" -NoTypeInformation
+Write-Host "✅ Table extraction complete. Output saved to $($CSVExportPath)SentinelAnalyticsRules.csv"
 
 # Open the Table Mapping CSV from PS
-Invoke-Item -Path "$($CSVExportPath)\SentinelAnalyticsRules.csv"
+#Invoke-Item -Path "$($CSVExportPath)\SentinelAnalyticsRules.csv"
